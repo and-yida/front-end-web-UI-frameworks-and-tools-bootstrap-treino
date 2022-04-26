@@ -1,0 +1,98 @@
+NAVIGATION E NAVIGATION BAR
+
+Devemos fornecer maneiras intuitivas dos usuários navegarem pelo site.
+Geralmente temos uma barra com ponteiros para informações que podemos acessar no site - links de outras páginas dele.
+Breadcrumbs auxiliam a indicar a hierarquia de navegação em que o usuário se encontra no site no momento, ou o caminho de etapas que ele está percorrendo.
+Criar navigation bar com Bootstrap: <nav class="navbar">
+  Alguns parâmetros:
+  fixed-top: fixado na parte superior da página, mesmo quando desliza a página.
+  navbar-expand-sm: para xs e sm telas, a barra fica sempre extendida;
+Criamos um container e classes com as opções da barra.
+  Alguns parâmetros:
+  mr-auto: aumenta a margem da direita, jogando o conteúdo maisà esquerda possível.
+
+Navigation bar rensponsiva
+Toggle button (interruptor) altera uma configuração entre dois estados - ao ser pressionado, a funcionalidade associada é ativada, e o botão reflete isso visualmente, por parecer pressionado.
+Adicionar um toggle button para mostrar e esconder os links da barra. Pode ser usado, por exemplo, para xs e sm telas.
+Ex.:
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+  //
+  //#Navbar passa a indicar o ID desse elemento div button
+Ícone usual no Bootstrap do toggle button para navbar: navbar-toggler-icon
+A lista de links deve estar dentro de um div, com o ID declarado anteriormente.
+  <div class="" id="Navbar">
+Incluir modificação no CSS para o body adicionando padding, se forma que a navbar não se sobreponha ao heading.
+z-index: ordem de sobreposição.
+
+Breadcrumbs
+Ex.:
+<ol class="col-12 breadcrumb">
+  <li class="breadcrumb-item"><a href="./index.html">Home</a>
+  ...
+
+ICON FONTS
+
+Icon fonts permitem incluir pequenas imagens que podem ser estilizadas como se fossem textos. Conjunto de símbolos e glifos.
+Utilizaremos o pacote Font Awesome e bootstrap-social.
+Instalar os pacotes no projeto:
+  npm install font-awesome@4.7.0 --save
+  npm install bootstrap-social@5.1.1 --save
+Adicionar no head:
+  <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
+  Ex.:
+  <i class="fa fa-home"></span>
+  //para usar como botões:
+    <div class="text-center">
+      <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fa fa-google-plus"></i></a>
+
+USER INPUT
+
+Interação do usuário com a página se dá por meio de:
+  <a> tags: hyperlinks;
+  <button>: botoões;
+  <form>: formulários; entre outros.
+
+Buttons
+Botões fornecem interações simples.
+Uma <a> tag pode ser estilizada usando CSS para aparentar um botão.
+Criando um grupo de botões:
+  <div class="btn-group" role="group"></div>
+  Cada botão:
+  <a role="button" class="btn"></a>
+  Ex.:
+  <a role="button" class="btn btn-primary" href="tel:+85212345678"><i class="fa fa-phone"></i> Call</a>
+  //btn-primary é a cor
+ARIA roles são adicionados a elementos html usando: role="role type". Os roles (função) conferem significado semântico ao conteúdo, e permite ferramentas apresentar e fornecer interação com objetos respeitando aquilo que é o esperado daquele objeto. role=button refere-se a um elemento botão.
+
+Forms
+O formulário é criado com: <form>
+Para criar um grupo de linhas para o formulário, declarar um div para cada linha: <div class="form-group row">
+Exemplos de classes Bootstrap: col-form-label; form-control.
+Label é o texto que acompanha a caixa de texto. O input "text" é a caixa de texto propriamente, com id, name e placeholder (aqui aparece um texto indicando o que deve ser escrito no campo).
+Ex:
+  <label for="firstname" class="col-md-2 col-form-label">First Name</label>
+      <div class="col-md-10">
+      <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name">
+Checkbox
+Ex.:
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" name="approve" id="approve" value="">
+      <label class="form-check-label" for="approve">
+       <strong>May we contact you?</strong>
+      </label>
+Submite
+Ex.:
+  <div class="form-group row">
+    <div class="offset-md-2 col-md-10">
+      <button type="submit" class="btn btn-primary">
+         Send Feedback
+      </button>
+    </div>
+
+BOOTSTRAP TABLES AND CARDS
+Criamos uma tabela através de: <table class="table">
+<tr> linha; <td> célula.
+<thead>; <tbody>
+Cards são componentes bastante versáteis, que podem ser usados para destacar um conteúdo.
+
