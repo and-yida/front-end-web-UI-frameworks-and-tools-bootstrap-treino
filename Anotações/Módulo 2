@@ -9,10 +9,10 @@ Criar navigation bar com Bootstrap: <nav class="navbar">
   navbar-expand-sm: para xs e sm telas, a barra fica sempre extendida;
 Criamos um container e classes com as opções da barra.
   Alguns parâmetros:
-  mr-auto: aumenta a margem da direita, jogando o conteúdo maisà esquerda possível.
+  mr-auto: aumenta a margem da direita, jogando o conteúdo mais à esquerda possível.
 
 Navigation bar rensponsiva
-Toggle button (interruptor) altera uma configuração entre dois estados - ao ser pressionado, a funcionalidade associada é ativada, e o botão reflete isso visualmente, por parecer pressionado.
+Toggle button (interruptor) altera uma configuração entre dois estados - ao ser pressionado, a funcionalidade associada é ativada, e o botão reflete isso visualmente por parecer pressionado.
 Adicionar um toggle button para mostrar e esconder os links da barra. Pode ser usado, por exemplo, para xs e sm telas.
 Ex.:
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
@@ -21,14 +21,15 @@ Ex.:
 Ícone usual no Bootstrap do toggle button para navbar: navbar-toggler-icon
 A lista de links deve estar dentro de um div, com o ID declarado anteriormente.
   <div class="" id="Navbar">
-Incluir modificação no CSS para o body adicionando padding, se forma que a navbar não se sobreponha ao heading.
+Incluir modificação no CSS para o body adicionando padding, de forma que a navbar não se sobreponha ao heading.
 z-index: ordem de sobreposição.
 
 Breadcrumbs
 Ex.:
-<ol class="col-12 breadcrumb">
-  <li class="breadcrumb-item"><a href="./index.html">Home</a>
-  ...
+  <ol class="col-12 breadcrumb">
+    <li class="breadcrumb-item"><a href="./index.html">Home</a>
+    ...
+
 
 ICON FONTS
 
@@ -45,6 +46,7 @@ Adicionar no head:
   //para usar como botões:
     <div class="text-center">
       <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fa fa-google-plus"></i></a>
+
 
 USER INPUT
 
@@ -63,7 +65,7 @@ Criando um grupo de botões:
   Ex.:
   <a role="button" class="btn btn-primary" href="tel:+85212345678"><i class="fa fa-phone"></i> Call</a>
   //btn-primary é a cor
-ARIA roles são adicionados a elementos html usando: role="role type". Os roles (função) conferem significado semântico ao conteúdo, e permite ferramentas apresentar e fornecer interação com objetos respeitando aquilo que é o esperado daquele objeto. role=button refere-se a um elemento botão.
+ARIA roles são adicionados a elementos html usando: role="role type". Os roles (função) conferem significado semântico ao conteúdo, e permitem ferramentas apresentar e fornecer interação com objetos respeitando aquilo que é o esperado daquele objeto. Ex.: role=button refere-se a um elemento botão.
 
 Forms
 O formulário é criado com: <form>
@@ -81,7 +83,7 @@ Ex.:
       <label class="form-check-label" for="approve">
        <strong>May we contact you?</strong>
       </label>
-Submite
+Submit
 Ex.:
   <div class="form-group row">
     <div class="offset-md-2 col-md-10">
@@ -90,9 +92,66 @@ Ex.:
       </button>
     </div>
 
+
 BOOTSTRAP TABLES AND CARDS
+
 Criamos uma tabela através de: <table class="table">
-<tr> linha; <td> célula.
-<thead>; <tbody>
+  <tr> linha; <td> célula.
+  <thead>; <tbody>
 Cards são componentes bastante versáteis, que podem ser usados para destacar um conteúdo.
 
+Tabela
+Incluir a tabela dentro do div <div class="table-responsive"> faz com que a tabela seja responsiva -  em telas pequenas, é possível rolar horizontalmente a tabela para vê-la por completo.
+
+Card
+Incluir card:
+  <h3 class="card-header"></h3>  //título
+  <div class="card-body">
+Exemplo de um card com description list:
+    <dl class="row">
+        <dt class="col-6">Started></dt>
+        <dd class="col-6>3 Feb. 2013"></dd>
+    //dl description list: apresenta um grupo de nomes e valores
+    //dt termo ou nome
+    //dd descrição, definição ou valor
+blockquote (citação de bloco): indica que o texto é uma longa citação. Normalmente, esta é processada visualmente pelo recuo. A URL ou o texto da fonte da citação pode ser dado usando "cite".
+
+
+IMAGES AND MEDIA
+
+Bootstrap fornece suporte para incluir imagens e outras mídias.
+Algumas formas de exibir imagens:
+    card ("card"): incluir uma imagem em um card;
+    media object ("media): incluir e posicionar uma imagem e descrição (media body);
+    responsive embed ("embed-responsive"): embutir mídia com tamanho responsivo - elementos "iframe", "video", "object", etc. exemplos de tamanhos: embed-responsive-16by9; embed-responsive-4by3
+Para que a imagem seja automaticamente responsiva, automaticamente adaptando-se ao tamanho da tela: <img src="" class="img-fluid">
+
+D-flex
+Utilizar a classe "d-flex" do Bootstrap permite gerenciar o layout utilizando um conjunto de utilitários: <div class="d-flex">
+Recursos: alterar direção; alinhamento; preenchimento (elementos com largura idêntica); estender; etc.
+Ex.:
+  <img class="d-flex mr-3 img-thumbnail align-self-center"
+    src="" alt="">
+  //alinhamento vertical
+
+Media object
+Criamos um media object através de: <div class="media">
+É dividido em "media" e "media-body". É interessante colocar espaçamento (spacing) entre a imagem e o body.
+Ex.:
+  <div class="media">
+    <img class="mr-3" src="" alt="">
+    <div class="media-body">
+      <h5 class="mt-0">Media heading</h5>
+      text
+    </div>
+  </div>
+  // mr-3 margem da direita tamanho 3, separando imagem e o texto.
+Recursos: criar nesting; modificar alinhamento; mudar ordem entre mídia e texto; criar lista de objetos de mídia.
+
+
+ALERTING USERS
+
+Bootstrap possui diferentes componentes que permitem manter o usuário informado: badges, alter/error messages, progress bars, entre outros.
+Badges (distintivos) são uma forma de adicionar pequenas informações para chamar a atenção.
+Alerts (alertas) podem receber um botão para que o usuário possa clicar para fechar o alerta.
+Progress bars (barras de progresso) informam o progresso da tarefa que o usuário iniciou no site.

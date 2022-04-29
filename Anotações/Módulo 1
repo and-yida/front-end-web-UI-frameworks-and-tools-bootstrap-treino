@@ -1,8 +1,8 @@
 FULL STACK WEB DEVELOPMENT
 
-Em front-end web UI development, utilizaremos principalmente Bootstrap 4.
+Neste projeto em front-end web UI development, utilizaremos principalmente Bootstrap 4.
 A apresentação do site geralmente é construída com HTML, CSS e JavaScript, é gerada no lado do servidor e enviada para o lado do cliente sob a forma de uma página web.
-Existe uma outra tendência que utiliza uma única linguagem para implementar todo o stack, com JavaScript. O front-end seria uma aplicação usando frameworks como Angular e React, a lógica server-side seria impletada usando tecnologias como NodeJS e banco de dados com tecnologias como MongoDB e JSON. A troca de informações entre o server side e o client side é geralmente feita usando JSON como formato e o server-side com suporte a REST API endpoint.
+Existe uma outra tendência que utiliza uma única linguagem para implementar todo o stack, com JavaScript. O front-end seria uma aplicação usando frameworks como Angular e React, a lógica server-side seria implementada usando tecnologias como NodeJS, e banco de dados com tecnologias como MongoDB e JSON. A troca de informações entre o server side e o client side é geralmente feita usando JSON como formato e o server-side com suporte a REST API endpoint.
 
 
 NODE.JS E NPM
@@ -12,7 +12,6 @@ Node Core e Standart Library são as ferramentas que nos permitem escrever progr
 NPM (Node package manager) é o gerenciador do ecossistema do Node. Um pacote em Node consiste um arquivos JS e um package.json.
 
 Package.json
-
 Finalidades do package.json:
     Fornece documentação de quais pacotes o seu projeto está contando com;
     Permite especificar as versões desses pacotes utilizados;
@@ -29,6 +28,7 @@ No arquivo package.json, vamos adicionar:
 A página no navegador irá refletir automaticamente as mudanças que fazemos nos arquivos.
 Criar um arquivo chamado .gitignore e colocar o nome de arquivos e pastas fará com que essas pastas sejam ignoradas ao fazer um commit. Esses arquivos também são ignorados quando alguém clona seu repositório. A pasta /node_modules pode ser ignorada pois o package.json já contém as informações dos pacotes necessários.
 
+
 FRONT-END UI FRAMEWORKS
 
 Front-end UI frameworks são coleções de HTML, CSS E JavaScript templates para interface de usuário (UI) componentes. Eles definem uma série de classes de CSS que permitem incluir componentes como botões, tabelas, barras de navegação, alertas, etc.; permitem definir de forma consistente a tipografia utilizada no design do site. Em suma, as frameworks auxiliam a fazer rapidamente o design e implementação de um site.
@@ -37,6 +37,7 @@ Por que utilizá-los?
   Compatibilidade entre navegadores;
   Otimiza o tempo;
   Suporte da comunidade.
+
 
 BOOTSTRAP
 
@@ -63,7 +64,11 @@ Logo acima do encerramento do body, incluir o script do jQuery, do Popper.js e d
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 O CSS é colocado no início pois quando a página estiver sendo carregada de um servidor, você quer que as classes do CSS sejam carregadas imediatamente para que a página comece a ser renderizada. O código JavaScript vai sendo carregado depois, o que leva mais algum tempo, e por isso fica na parte inferior da corpo do código.
 
-Design responsivo
+_____________________________________________________
+
+
+DESIGN RESPONSIVO
+
 O desenvolvimento de uma aplicação web deve levar em conta a adaptação à janela de exibição do dispostivo do usuário.
 O desenvolvimento mobile first se volta primeiramente ao design para celular, e considera depois satisfazer os requisitos para estender a tela para outros dispositivos maiores. Isso deve ser feito automaticamente baseado em informações obtidas do dispositivo do usuário.
 
@@ -76,7 +81,9 @@ Ex.:
   }
   //customização para desktop
 
-Grid System
+
+GRID SYSTEM
+
 A meta tag viewport no index.html indica que quando a página está sendo renderizada pelo navegador, este irá aferir o tamanho da tela e automaticamente adptará a renderização. As classes CSS atreladas aquele tamanho serão acessadas. Isso é encargo do Bootstrap grid system.
 O Bootstrap grid se aproveita da flexibilidade das opções de layout em CSS, baseada em caixas (containers).
 Usamos "div" para definir um elemento ao qual aplicamos a classe container. O container é a unidade que abriga o conteúdo propriamente dito do elemento. Esses containers podem ter tamanho fixo, sendo o tamanho deles automaticamente adaptados de acordo com a janela de exibição; ou podemos especificá-los.
@@ -114,7 +121,3 @@ Display property: afeta a exibição de classes de acordo com o tamanho da tela.
   os valores podem ser: none, inline, inline-block, block, table; etc.
 Ex.:
   <span class="d-none d-sm-block"> //invisível apenas no xs (extra small)
-
-
-
-
