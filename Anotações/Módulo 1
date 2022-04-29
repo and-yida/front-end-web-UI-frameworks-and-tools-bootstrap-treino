@@ -2,7 +2,7 @@ FULL STACK WEB DEVELOPMENT
 
 Neste projeto em front-end web UI development, utilizaremos principalmente Bootstrap 4.
 A apresentação do site geralmente é construída com HTML, CSS e JavaScript, é gerada no lado do servidor e enviada para o lado do cliente sob a forma de uma página web.
-Existe uma outra tendência que utiliza uma única linguagem para implementar todo o stack, com JavaScript. O front-end seria uma aplicação usando frameworks como Angular e React, a lógica server-side seria impletada usando tecnologias como NodeJS e banco de dados com tecnologias como MongoDB e JSON. A troca de informações entre o server side e o client side é geralmente feita usando JSON como formato e o server-side com suporte a REST API endpoint.
+Existe uma outra tendência que utiliza uma única linguagem para implementar todo o stack, com JavaScript. O front-end seria uma aplicação usando frameworks como Angular e React, a lógica server-side seria implementada usando tecnologias como NodeJS, e banco de dados com tecnologias como MongoDB e JSON. A troca de informações entre o server side e o client side é geralmente feita usando JSON como formato e o server-side com suporte a REST API endpoint.
 
 
 NODE.JS E NPM
@@ -121,7 +121,3 @@ Display property: afeta a exibição de classes de acordo com o tamanho da tela.
   os valores podem ser: none, inline, inline-block, block, table; etc.
 Ex.:
   <span class="d-none d-sm-block"> //invisível apenas no xs (extra small)
-
-
-
-
