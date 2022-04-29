@@ -1,0 +1,52 @@
+BOOTSTRAP JAVASCRIPT COMPONENTS
+
+Bootstrap dá suporte a várias classes CSS que podem ser aplicadas a marcações HTML. Os componentes baseados em CSS podem ver ativados aplicando as classes CSS do Bootstrap.
+Parte das classes CSS do Bootstrap começam com uma classe base - por exemplo, o obitão advém da classe "btn", ao qual é possível adicionar outras classes e modificadores - as modifier classes podem ser aplicadas para modificar o comportamento do componente base.
+Dessa forma, o pontapé inicial é aplicar das classes de JavaScript. Podemos usar pluings de JavaScript para nos aproveitarmos dessas classes.
+JQuery é uma biblioteca em JS que facilita a aproximação ao todo do conteúdo de JS. Bootstrap vai além e reúne os plugins de JS (incluindo JQuery-based) em um componente que pode ser mais facilmente utilizável.
+Componentes JS do Bootstrap podem ser utilizados sem que haja a necessidade de escrever nenhuma linha de JS. Utilizaremos a sintaxe "data-* atributos". Os atributos data adicionam mais informações relacionadas ao elemento (descartando o uso de alternativas semanticamente inapropriadas). 
+O "data-toggle" é um atributo de dados do HTML que liga automaticamente o elemento ao tipo correspondente.
+Ex.:
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="#"
+                role="tab" data-toggle="tab">
+O "data-target" é um atributo que faz referência ao seu alvo. Contém um seletor CSS que aponta para o elemento HTML.
+Ex.:
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+
+
+TABS, PILLS AND TABBED NAVIGATION
+
+Tabs and pills
+Elementos de navegação permitem navegar por conteúdos na página que são organizados em múltiplos painéis.
+Com as abas, é possível revelar conteúdo clicando, sem ter que mudar de página.
+Criamos abas de navegação através de:
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="#id"
+                role="tab" data-toggle="tab">Tab text</a>
+    //criamos uma lista, cada nav-item é o cabeçalho de uma aba
+    //colocar em outro div os conteúdos de cada aba
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade" id="peter">
+    //criamos uma classe "tab-content"
+    //cada div "tabpanel" referencia o id de sua respectiva aba
+
+
+COLLAPSE AND ACCORDION
+
+O plugin Collapse fornece maneiras de revelar e esconder conteúdo. O acionamento geralmente é feito por um botão ou um link.
+No uso de collapse na barra de navegação, temos um botão toggler, e um div "navbar-collapse" com o id da barra (que agiria como o mecanismo para que o plugin Collapse funcione).
+Ex.:
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+    //...
+    <div class="collapse navbar-collapse" id="Navbar">
+No accordion, um item do conteúdo é revelado por vez, de forma que ao clicar em um link, o conteúdo é revelado ou escondido horizontalmente.
+
+    
+TOOLTIPS, POPOVERS AND MODALS
+
+Existem recursos para revelar informação sobrepondo conteúdos na página. Um exemplo é revelar um conteúdo no momento em que o usuário clica em algo ou passa o cursor sobre determinado ponto. A informação é exibida como uma sobreposição.
+É interessante colocar uma tooltip sobre botões e links, indicando qual ação aquele elemento desencadeia.
+Modal é utilizado para apresentar informações mais detalhadas (exemplo janela de login).
