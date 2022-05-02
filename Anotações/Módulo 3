@@ -7,6 +7,7 @@ JQuery é uma biblioteca em JS que facilita a aproximação ao todo do conteúdo
 Componentes JS do Bootstrap podem ser utilizados sem que haja a necessidade de escrever nenhuma linha de JS. Utilizaremos a sintaxe "data-* atributos". Os atributos data adicionam mais informações relacionadas ao elemento (descartando o uso de alternativas semanticamente inapropriadas). 
 O "data-toggle" é um atributo de dados do HTML que liga automaticamente o elemento ao tipo correspondente.
 Ex.:
+    
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a class="nav-link" href="#"
@@ -44,9 +45,105 @@ Ex.:
     <div class="collapse navbar-collapse" id="Navbar">
 No accordion, um item do conteúdo é revelado por vez, de forma que ao clicar em um link, o conteúdo é revelado ou escondido horizontalmente.
 
-    
+
 TOOLTIPS, POPOVERS AND MODALS
 
 Existem recursos para revelar informação sobrepondo conteúdos na página. Um exemplo é revelar um conteúdo no momento em que o usuário clica em algo ou passa o cursor sobre determinado ponto. A informação é exibida como uma sobreposição.
 É interessante colocar uma tooltip sobre botões e links, indicando qual ação aquele elemento desencadeia.
 Modal é utilizado para apresentar informações mais detalhadas (exemplo janela de login).
+É necessário adicionar um script para ativar os recursos, que está na sintaxe do JQuery. Para o tooltip, mo final da seção body (junto aos pacotes), adicionar:
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+    //quando o documento (página) estiver pronta para ser renderizada, essa função é invocada.
+
+Tooltip
+Para adicionar uma tooltip a um botão, adicionar: data-toogle="tooltip" data-hmtl="true"
+Ex.:
+    <a role="button" class="btn"
+    data-toggle="tooltip" data-html="true" title="text"
+    data-placement="bottom">Botão</a>
+    //data-html é atributo que vai permitir estilizar usando HTML, para em seguida definir o title
+    //data-placement define em que posição a tooltip aparece em relação ao botão
+
+Modal
+Para criar um modal, utilizar um div de classe "modal", definir um id e role "dialog". Dentro disso, criar um outro div para o conteúdo, com classe "modal-dialog" e role "content".
+Ex.:
+    <div id="loginModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg" role="content">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Login</h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                    </button>
+    //temos aqui um botão para fechar o modal
+                </div>
+                <div class="modal-body">
+No caso de um modal para fazer login, podemos adicionar um formulário no corpo do modal.
+    <div class="modal-body">
+        <form>
+
+        //primeira linha: email, senha e checkbox "lembrar-me"
+
+            <div class="form-row">
+                <div class="form-group col-sm-4">
+                    <label class="sr-only" for="exampleInputEmail3">Email address</label>
+                    <input type="email" class="form-control form-control-sm mr-1" id="exampleInputEmail3" placeholder="Enter email">
+                </div>
+                <div class="form-group col-sm-4">
+                    <label class="sr-only" for="exampleInputPassword3">Password</label>
+                    <input type="password" class="form-control form-control-sm mr-1" id="exampleInputPassword3" placeholder="Password">
+                </div>
+                <div class="col-sm-auto">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label"> Remember me
+                         </label>
+                    </div>
+                </div>
+            </div>
+            // sr-only esconde um elemento para todos os dispositivos, exceto leitores de tela (acessibilidade para quem não enxerga)
+
+        //segunda linha: botões cancelar e entrar
+
+            <div class="form-row">
+                <button type="button" class="btn btn-secondary btn-sm ml-auto" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary btn-sm ml-1">Sign in</button>        
+            </div>
+        </form>
+    </div>
+Além disso, posicionar o modal na navbar:
+    <span class="navbar-text">
+        <a data-toggle="modal" data-target="#loginModal">
+        <span class="fa fa-sign-in"></span> Login</a>
+    </span>
+
+
+CAROUSEL
+
+Carousel permite exibir múltiplos itens através de uma animação, como um slideshow. É possível controlar manualmente o carrossel, passando os itens para direita ou esquerda.
+Dentro de uma coluna, criar a classe "carousel slide".
+    <div id="mycarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+Cada item (slide) é denifido por "carousel-item"
+     <div class="carousel-item active">   //active é para o primeiro elemento a aparecer
+         <img class=""
+        src="" alt="">
+        <div class="carousel-caption d-none d-md-block">
+            <h2>...</h2>
+            <p>...</p>
+É necessário criar, dentro da classe "carousel-inner", uma lista dos slides.
+    <ol class="carousel-indicators">
+        <li data-target="#mycarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#mycarousel" data-slide-to="1"></li>
+        <li data-target="#mycarousel" data-slide-to="2"></li>
+    </ol>
+Por fim, as setas (botões) que controlam a passagem de um slide para outro à direita e à esquerda são definidos da seguinte forma:
+<a class="carousel-control-prev" href="#mycarousel" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+</a>
+<a class="carousel-control-next" href="#mycarousel" role="button" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
