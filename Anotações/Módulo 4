@@ -227,5 +227,89 @@ Ex.:
     //-d dist indica o destino
     //--htmlmin faz uglification
     //&& para começar especificar outro caso
-Para finalizar, para criar a pasta de distribuição /dist e executar o build (com todas essas tarefas necessárias para tratar o projeto e implantar o site), no packege.json:
+Para finalizar, para criar a pasta de distribuição /dist e executar o build (com todas essas tarefas necessárias para tratar o projeto e implantar o site), no package.json:
     "build": "npm run clean && npm run imagemin && npm run copyfonts && npm run usemin"
+Para subir a página online, bastaria fazer o upload da pasta dist em um servidor web.
+
+
+TASK RUNNERS
+
+Anteriormente, utilizamos os NPM scripts para automatizar tarefas. Temos opções também de automatizadores de tarefas,como Grunt e Gulp.
+A ideia é configurar as tarefas uma vez, e repetí-las automaticamente tantas vezes quanto forem necessárias.
+Grunt e Gulp permitem escrever plugins que são capazes de executar as tarefas.
+
+
+GRUNT
+
+Instalar Grunt:
+    npm install -g grunt-cli@1.2.0
+    npm install grunt@1.0.2 --save-dev
+Com Grunt, instalamos os plugins das tarefas e configuramos no Gruntfile.js .
+    'use strict';
+
+    module.exports = function (grunt) {
+        // definir a configuração das tarefas
+        grunt.initConfig({
+
+        });
+    };
+Grunt SASS converte SASS em CSS. Time grunt exibe as estatísticas de tempo de execução das tarefas. Jit Grunt carrega os plugins em todo lugar em que eles são requisitados na aplicação.
+    npm install grunt-sass@2.1.0 --save-dev
+    npm install time-grunt@1.4.0 --save-dev
+    npm install jit-grunt@0.10.0 --save-dev
+Para executar Grunt SASS: grunt css
+Grunt Contrib Watch mantém monitoramento sobre arquivos e Grunt Browser Sync recarrega automaticamente o navegador quando algum desses arquivos é atualizado.
+    npm install grunt-contrib-watch@1.0.0 --save-dev
+    npm install grunt-browser-sync@2.2.0 --save-dev
+Com todos esses plugins acima citados, o Gruntfile fica da seguinta maneira:
+    'use strict';
+
+    module.exports = function (grunt) {
+
+        require('time-grunt')(grunt);
+
+        require('jit-grunt')(grunt);  //carrega automaticamente as tarefas
+
+        // configuração de todas as tarefas
+        grunt.initConfig({
+            sass: {
+                dist: {
+                    files: {
+                        'css/styles.css': 'css/styles.scss'
+                    }
+                        //arquivo que precisa ser convertido: formato final
+                }
+            },
+            watch: {
+                files: 'css/*.scss',
+                tasks: ['sass']
+            },
+                //aquivo que será monitorado
+                //referência a tarefa ['sass'], que deve ser executada quando há alterações no arquivo
+
+
+            browserSync: {
+                dev: {
+                    bsFiles: {
+                        src : [
+                            'css/*.css',
+                            '*.html',
+                            'js/*.js'
+                        ]
+                    },
+                            //arquivos monitorados, que devem disparar o comando de recarregar a página quando alterados
+                    options: {
+                        watchTask: true,
+                        server: {
+                            baseDir: "./"
+                        }
+                            //diretório do meu servidor
+                    }
+                }
+            }
+        });
+
+        grunt.registerTask('css', ['sass']);
+        grunt.registerTask('default', ['browserSync', 'watch']);
+        //a tarefa definida como default pode ser executada basicamente com o comando grunt no terminal.
+    };
