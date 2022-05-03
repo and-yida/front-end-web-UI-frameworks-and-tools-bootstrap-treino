@@ -1,0 +1,231 @@
+BOOTSTRAP AND JQuery
+
+Os componentes Bootstrap baseados em JavaScript são disponibilizados a partir de JQuery, uma vez que os plugins desses componentes são escritos em JQuery.
+Temos utilizado até aqui esses componentes sem precisar escrever código, apenas com data-* attributes.
+As APIs (Application Programming Interfaces) são construções disponíveis nas linguagens de programação que permitem a desenvolvedores criar funcionalidades complexas mais facilmente. Tais construções abstraem o código mais complexo, proporcionando o uso de sintaxes mais simples em seu lugar.APIs JavaScript estão disponíveis para todos os componentes do Bootstrap. Para controlá-los, é necessário escrever código usando a sintaxe de JQuery e JS.
+
+JQuery
+
+JQuery é um biblioteca JS com muitos recursos, como: manipular HTML e DOM, manipular classes CSS para vários elementos HTML, manipular métodos de eventos HTML, suporta vários efeitos e animações, e permite interagir com o servidor back-end através de AJAX.
+Os próprios componentes Bootstrap foram construídos através do JQuery.
+
+JQuery sintaxe
+O sinal de dólar "$" é utilizado para definir que a sentença acessa a biblioteca JQuery:
+    $(selector).action()
+O selector indica o elemento HTML dentro do DOM ao qual você deseja manipular. Action é ação específica que se quer empregar.
+Ex.:
+    <script>
+        $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+    // quando o document está pronto, a função (que está passada como parâmetro) é executada
+    //todos os elementos com o atributo "data-toggle=tooltip" vão executar a ação relacionada a função tooltip, isto é, esse recurso será acionado
+
+Selectors
+Os selectors podem especificar
+    uma tag ("button", "p", "h4", etc.), entre "
+    um id, utilizando # (exemplo #Navbar)
+    uma classe (exemplo ".btn", ".btn.btn-default"), entre "
+    um atributo (exemplo "[href]"", "[data-toggle="tooltip"]")
+    um elemento atual, já selecionado, utilizando (this)
+
+Events
+Eventos são definidos atráves da interação do usuário com algo na página, causando eventos no DOM:
+    mouse: click, dbclick, mouseenter
+    teclado: keypress, keydown, keyup
+    form: submit, change, focus
+    document, window: load, resize, scroll, unload
+Os event methods têm sintaxe: ready(), click(), on() (etc.)
+Podemos modificar atributos data desses eventos como no exemplo do carrossel: data-slide="prev" data-ride="carousel" data-interval=5000
+Podemos também selecionar uma propriedade específica de um elemento, exemplo: $('.carousel').carousel({interval:2000})
+O comportamento dos eventos também podem desencadear outros eventos, que podemos manipular.
+Ex.:
+    $("#myCarousel").on('slide.bs.carousel',function() {
+        //faz algo
+    })
+    //quando a ação do slide inicia, a função é invocada
+
+Modificando um componente usando JS
+Podemos alterar um elemento dentro de uma classe div (elemento filho), indicando-o por "children".
+A seguir temos um exemplo de função condicional, em que se aplica "has", "remove" e "add" em um componente.
+Ex.:
+    $(document).ready(function(){
+        $("#carouselButton").click(function(){
+            if ($("#carouselButton").children("span").hasClass('fa-pause')) {
+                $("#mycarousel").carousel('pause');
+                $("#carouselButton").children("span").removeClass('fa-pause');
+                $("#carouselButton").children("span").addClass('fa-play');
+        //se o elemento "carouselButton" tiver um elemento filho que possui (has) determinada classe, a função é ativada.
+        //neste caso, o elemento filho é um ícone de botão pause. quando clicado, o carrosel pausa, o botão é removido e é adicionado em seu lugar o botão de play.
+            }
+            else if ($("#carouselButton").children("span").hasClass('fa-play')){
+                $("#mycarousel").carousel('cycle');
+                $("#carouselButton").children("span").removeClass('fa-play');
+                $("#carouselButton").children("span").addClass('fa-pause');
+        //a segunda possibilidade é se o botão play estiver ativo - o carrosel starta, o botão play é removido e o botão pause é adicionado em seu lugar.
+
+
+CSS PREPROCESSORS
+
+A falta de alguns recursos em CSS faz com que sua utilização seja maçante. Os pré-processadores tentam suprir algumas dessas lacunas.
+Less e Sass (Scss) são pré-processadores populares que ampliam a sintaxe do CSS aproximando-o a uma linguagem de programação comum. Eles são compilados em CSS automaticamente antes de seu uso na página web. Alguns dos recursos suportados: variáveis, aninhamento de seletores, mixins, funções e expressões. 
+Bootstrap utiliza Sass para definir a origem de suas classes CSS.
+
+Variáveis
+Em Scss, criar variável que pode ser utilizada quando da definição de classes: $nome: valor . Com isso, podemos nos referir ao nome ao invés do valor em si.
+Ex.:
+    $It-gray: #ddd
+
+Aninhamento
+Podemos definir as variáveis de subclasses facilmente utilizando o aninhamento.
+Ex.:
+    $background-dark: #512DA8
+    $carousel-item-height: 300px;
+
+    .carousel {
+        background:$background-dark;
+        .carousel-item {
+            height: $carousel-item-height;
+            img {
+                ...
+
+Mixins
+Com mixins, é possível fazer várias declarações de uma vez.
+Ex.:
+    @mixin zero-margin {
+        margin:0px auto;
+        background:@white
+    }
+
+    .row-header {
+        @include zero-margin;
+        padding:0px auto;
+    }
+    //aqui fizemos uso das variáveis do mixin zero-margin, através de @include
+É possível abrir espaço para parâmetros adicionais, que serão definidos quando do emprego do mixin.
+Ex.:
+    @mixin zero-margin ($pad-up-dn, $pad-left-right) {
+        margin:0px auto;
+        padding: $pad-up-dn $pad-left-right;
+    }
+
+    .row-header {
+        @include zero-margin(50px, 0px);
+        border-bottom: 1px ridge;
+    }
+    //com Scss, no @include, passamos os valores dos parâmetros adicionais do mixin (padding)
+
+Operações matemáticas
+É possível aplicar operações matemáticas nos valores das variáveis.
+Ex.:
+    $carousel-item-height: 300px;
+    .carousel-item {
+        height: $carousel-item-height;
+    }
+
+    .carousel-item .item-large {
+        height: $carousel-item-height *2;
+    }
+    //na segunda classe, aplicamos a variável $carousel-item-height mas multiplicada por 2.
+
+Outros recursos
+É possível importar as classes de um CSS em outro através de @import ""
+
+Less
+Na pasta css, criamos um arquivo styles.less . Um arquivo styles.css será gerado automaticamente compilando o pré-processador. Para tanto, é necessário instalar o node module Less: npm install -g
+less . No terminal, executar: lessc styles.less styles.css
+
+Scss
+Na pasta css, criamos um arquivo styles.scss . Um arquivo styles.css será gerado automaticamente compilando o pré-processador. Para tanto, é necessário instalar o node module Less: npm install -g
+less . No terminal, executar: lessc styles.less styles.css
+No arquivo package.json, em scripts adicionar: "scss": "node-sass -o css/ css/" . Isso indica que os arquivos convertidos irão para a pasta CSS, e que a origem é também a referida pasta.
+Para a conversão propriamente dita, executar: npm run scss
+
+
+BUILDING AND DEPLOYMENT
+
+Desenvolvimento web e implantação envolvem muitas tarefas repetitivas. É interessante o uso de ferramentas para automatizar as tarefas.
+
+CSS
+Algumas das tarefas automatizadas envolvendo CSS:
+    compilar Sass ou Less em CSS;
+    autoprefixer lida com possíveis problemas que podem aparecer mediante os diferentes navegadores;
+    minification remove caracteres desnecessários, compactando o código;
+    concatenação reúne diferentes arquivos CSS em um só, que precisa ser baixado pelo navegador quando da renderização do site.
+
+JavaScript
+Algumas das tarefas automatizadas envolvendo JavaScript:
+    JSHint checa o código procurando por erros e potenciais problemas (static code analysis);
+    concatenação reúne diferentes arquivos JS em um só;
+    uglification envolve minification e mangling para remover caracteres desnecessários e redução dos nomes das variáveis para letras;
+    dupla checagem por erros.
+
+Outras
+Outras tarefas antes da implantação envolvem:
+    otimização dos arquivos das imagens;
+    watch consiste em monitorar alterações nos arquivos e automaticamente repetir as tarefas;
+    testes;
+    construção final (building) do site para implantação.
+
+
+NPM SCRIPTS
+
+Alguns scripts NPM já foram utilizados neste projeto a essa altura.
+No arquivo package.json temos:
+  "scripts": {
+    "start": "npm run lite",
+    //startamos nosso lite-server no projeto
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lite": "lite-server",
+    //Lite Server para ver as alterações em tempo real através de um localhost no navegador
+    "scss": "node-sass -o css/ css/"
+    //transforma SCSS em código CSS
+  }
+Os scripts "start" e "run" são executados pelos comandos npm start e npm run no terminal.
+
+NPM modules para automatização de tarefas
+Instalar Onchange para monitorar mudanças nos arquivos do projeto: npm install --save-dev onchange
+Instalar Parallel Shell para permitir executar múltiplos NPM scrits simultaneamente, como monitorar e dar conta de outras tarefas ao mesmo tempo: npm install --save-dev parallelshell
+Além disso, incluir no package.json:
+    "watch:scss": "onchange \"css/*.scss\" -- npm run scss",
+    //onchange monitora o arquivo .scss na pasta css, e havendo alterações executa "run scss"
+    "watch:all": "parallelshell \"npm run watch:scss\" \"npm run lite\""
+    //parallelshell permite executar os dois scripts ao mesmo tempo
+E alterar "start" para:
+    "start": "npm run watch:all",
+A partir de agora, o comando "npm start" dará início tanto ao lite server quanto ao "watch:scss"
+
+Deployment
+Para subir o site online, utilizamos várias tarefas para processar os arquivos do projeto que criamos e gerar uma pasta de distribuição de todos os arquivos.
+Instalar rimraf para nos ajudar a limpar totalmente uma pasta: npm install --save-dev rimraf
+Instalar para copiar arquivos do /node_modules para a pasta de distribuição, para quando for feita a implantação, os font files também sejam implantados: npm -g install copyfiles
+Ex.:
+    //no package.json
+    "copyfonts": "copyfiles -f node_modules/font-awesome/fonts/* dist/fonts",
+    //os font files do Font Awesome serão copiados para a pasta de distribuição, de forma que quando o site for renderizado, as fontes do Font Awesome estarão lá. note que os arquivos aparecerão na pasta indicada (/dist/fonts)
+Instalar imagemin para comprimir as imagens e otimizar a renderização: npm -g install imagemin-cli
+Instalar o usemin que concatena os arquivos CSS e JS: npm install --save-dev usemin-cli cssmin uglifyjs htmlmin
+    esse module depende de outros 3, por isso instalamos todos estes
+Precisamos indicar nos arquivos em que escrevemos nosso código o bloco do código que especifica os arquivos CSS do Bootstrap que incluímos e que vão ser transferidos para o arquivo concatenado final. Os comentários do exemplo a seguir devem ser incluídos:
+    <!--build:css css/main.css-->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- endbuild -->
+De forma similar, para indicar o código JS incluído, comentar os scripts:
+    <!-- build:js js/main.js -->
+    <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <!-- endbuild -->
+Alterar também o package.json.
+Ex.:
+    "usemin": "usemin contactus.html -d dist --htmlmin -o dist/contactus.html && usemin aboutus.html -d dist --htmlmin -o dist/aboutus.html && usemin index.html -d dist --htmlmin -o dist/index.html",
+    //-d dist indica o destino
+    //--htmlmin faz uglification
+    //&& para começar especificar outro caso
+Para finalizar, para criar a pasta de distribuição /dist e executar o build (com todas essas tarefas necessárias para tratar o projeto e implantar o site), no packege.json:
+    "build": "npm run clean && npm run imagemin && npm run copyfonts && npm run usemin"
