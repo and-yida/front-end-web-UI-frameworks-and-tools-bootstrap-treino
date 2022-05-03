@@ -136,9 +136,96 @@ Less
 Na pasta css, criamos um arquivo styles.less . Um arquivo styles.css será gerado automaticamente compilando o pré-processador. Para tanto, é necessário instalar o node module Less: npm install -g
 less . No terminal, executar: lessc styles.less styles.css
 
-
 Scss
 Na pasta css, criamos um arquivo styles.scss . Um arquivo styles.css será gerado automaticamente compilando o pré-processador. Para tanto, é necessário instalar o node module Less: npm install -g
 less . No terminal, executar: lessc styles.less styles.css
 No arquivo package.json, em scripts adicionar: "scss": "node-sass -o css/ css/" . Isso indica que os arquivos convertidos irão para a pasta CSS, e que a origem é também a referida pasta.
 Para a conversão propriamente dita, executar: npm run scss
+
+
+BUILDING AND DEPLOYMENT
+
+Desenvolvimento web e implantação envolvem muitas tarefas repetitivas. É interessante o uso de ferramentas para automatizar as tarefas.
+
+CSS
+Algumas das tarefas automatizadas envolvendo CSS:
+    compilar Sass ou Less em CSS;
+    autoprefixer lida com possíveis problemas que podem aparecer mediante os diferentes navegadores;
+    minification remove caracteres desnecessários, compactando o código;
+    concatenação reúne diferentes arquivos CSS em um só, que precisa ser baixado pelo navegador quando da renderização do site.
+
+JavaScript
+Algumas das tarefas automatizadas envolvendo JavaScript:
+    JSHint checa o código procurando por erros e potenciais problemas (static code analysis);
+    concatenação reúne diferentes arquivos JS em um só;
+    uglification envolve minification e mangling para remover caracteres desnecessários e redução dos nomes das variáveis para letras;
+    dupla checagem por erros.
+
+Outras
+Outras tarefas antes da implantação envolvem:
+    otimização dos arquivos das imagens;
+    watch consiste em monitorar alterações nos arquivos e automaticamente repetir as tarefas;
+    testes;
+    construção final (building) do site para implantação.
+
+
+NPM SCRIPTS
+
+Alguns scripts NPM já foram utilizados neste projeto a essa altura.
+No arquivo package.json temos:
+  "scripts": {
+    "start": "npm run lite",
+    //startamos nosso lite-server no projeto
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lite": "lite-server",
+    //Lite Server para ver as alterações em tempo real através de um localhost no navegador
+    "scss": "node-sass -o css/ css/"
+    //transforma SCSS em código CSS
+  }
+Os scripts "start" e "run" são executados pelos comandos npm start e npm run no terminal.
+
+NPM modules para automatização de tarefas
+Instalar Onchange para monitorar mudanças nos arquivos do projeto: npm install --save-dev onchange
+Instalar Parallel Shell para permitir executar múltiplos NPM scrits simultaneamente, como monitorar e dar conta de outras tarefas ao mesmo tempo: npm install --save-dev parallelshell
+Além disso, incluir no package.json:
+    "watch:scss": "onchange \"css/*.scss\" -- npm run scss",
+    //onchange monitora o arquivo .scss na pasta css, e havendo alterações executa "run scss"
+    "watch:all": "parallelshell \"npm run watch:scss\" \"npm run lite\""
+    //parallelshell permite executar os dois scripts ao mesmo tempo
+E alterar "start" para:
+    "start": "npm run watch:all",
+A partir de agora, o comando "npm start" dará início tanto ao lite server quanto ao "watch:scss"
+
+Deployment
+Para subir o site online, utilizamos várias tarefas para processar os arquivos do projeto que criamos e gerar uma pasta de distribuição de todos os arquivos.
+Instalar rimraf para nos ajudar a limpar totalmente uma pasta: npm install --save-dev rimraf
+Instalar para copiar arquivos do /node_modules para a pasta de distribuição, para quando for feita a implantação, os font files também sejam implantados: npm -g install copyfiles
+Ex.:
+    //no package.json
+    "copyfonts": "copyfiles -f node_modules/font-awesome/fonts/* dist/fonts",
+    //os font files do Font Awesome serão copiados para a pasta de distribuição, de forma que quando o site for renderizado, as fontes do Font Awesome estarão lá. note que os arquivos aparecerão na pasta indicada (/dist/fonts)
+Instalar imagemin para comprimir as imagens e otimizar a renderização: npm -g install imagemin-cli
+Instalar o usemin que concatena os arquivos CSS e JS: npm install --save-dev usemin-cli cssmin uglifyjs htmlmin
+    esse module depende de outros 3, por isso instalamos todos estes
+Precisamos indicar nos arquivos em que escrevemos nosso código o bloco do código que especifica os arquivos CSS do Bootstrap que incluímos e que vão ser transferidos para o arquivo concatenado final. Os comentários do exemplo a seguir devem ser incluídos:
+    <!--build:css css/main.css-->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- endbuild -->
+De forma similar, para indicar o código JS incluído, comentar os scripts:
+    <!-- build:js js/main.js -->
+    <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <!-- endbuild -->
+Alterar também o package.json.
+Ex.:
+    "usemin": "usemin contactus.html -d dist --htmlmin -o dist/contactus.html && usemin aboutus.html -d dist --htmlmin -o dist/aboutus.html && usemin index.html -d dist --htmlmin -o dist/index.html",
+    //-d dist indica o destino
+    //--htmlmin faz uglification
+    //&& para começar especificar outro caso
+Para finalizar, para criar a pasta de distribuição /dist e executar o build (com todas essas tarefas necessárias para tratar o projeto e implantar o site), no packege.json:
+    "build": "npm run clean && npm run imagemin && npm run copyfonts && npm run usemin"
