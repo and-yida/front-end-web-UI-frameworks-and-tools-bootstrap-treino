@@ -1,0 +1,12 @@
+INTRODUÇÃO AO ANGULAR
+
+Angular é um framework JavaScript. Com Angular Material, podemos construir a interface de usuário, de forma similar ao que fizemos com Bootstrap 4 - ambas são UI frameworks. Os layouts podem ser construídos utilizando Angular Flex-Layout.
+
+Utilizar JavaScript envolve um nível de complexidade em manipular o DOM e manipular atualizações de dados manualmente. É a partir daí que entram os frameworks como o Angular.
+
+Uma bibliteca de software é uma coleção de implementações de comportamentos com uma interface bem definida pela qual o comportamento é invocado.
+O comportamento é fornecido para reutilização por vários programas independentes. Um programa invoca o comportamento fornecido pela biblioteca por meio de um mecanismo da linguagem.
+Por outro lado, um framework é uma abstração na qual o software fornece funcionalidades genéricas que podem ser seletivamente alteradas por código adicional escrito pelo usuário (possibilidade de customização).
+As bibliotecas fornecem funções de maneira que seu código está inteiramente a cargo de invocá-las e fazer uso delas onde parecer apropriado. Os frameworks fornecem implementações preenchidas pelo seu código para os detalhes. O framework está à frente de como as aplicações funcionam, e requisita o código do usuário como ajuda para que a tarefa seja feita.
+
+Como HTML faz apenas documentos estáticos, um framework como Angular supre a lacuna em relação a fornecer aplicações web dinâmicas e baseadas em dados. Além disso, Angular possui uma abordagem declarativa, e abordagem baseada em componentes.
